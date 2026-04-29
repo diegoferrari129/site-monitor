@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace SiteMonitor.Console;
@@ -10,12 +11,13 @@ public class SiteCheckerService : BackgroundService
     private readonly string _url;
     private readonly int _intervalSeconds;
 
-    public SiteCheckerService(ILogger<SiteCheckerService> logger)
+    public SiteCheckerService(ILogger<SiteCheckerService> logger, IOptions<MonitorSettings> options)
     {
         _logger = logger;
         _httpClient = new HttpClient();
-        _url = "https://www.google.com";
-        _intervalSeconds = 30;
+        var settings = options.Value;
+        _url = settings.Url;
+        _intervalSeconds = settings.CheckIntervalSeconds;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
