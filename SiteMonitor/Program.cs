@@ -1,10 +1,10 @@
-﻿namespace SiteMonitor
-{
-    internal class Program
+﻿using Microsoft.Extensions.Hosting;
+
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
-    }
-}
+
+    })
+    .Build();
+
+await host.RunAsync();
