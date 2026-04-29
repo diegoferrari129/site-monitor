@@ -1,4 +1,4 @@
-﻿namespace SiteMonitor.Console;
+﻿namespace SiteMonitor.POCO;
 
 public class MonitorSettings
 {
